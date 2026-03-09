@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Women's Day 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --pink-light: #ffd6e7;
+      --pink: #f8b4c8;
+      --pink-deep: #e879a8;
+      --purple: #9b59b6;
+      --purple-dark: #6c3483;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.18);
+    }
+
+    html, body { height: 100%; overflow-x: hidden; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a0533, #3d1060, #6b1f8a, #c0396e, #e879a8);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── CANVAS ── */
+    #canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    /* ── DATE BADGE ── */
+    .date-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 50px;
+      padding: 0.45rem 1.4rem;
+      color: var(--pink-light);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeSlideDown 0.8s ease both;
+    }
+
+    /* ── MAIN CARD ── */
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 28px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow:
+        0 8px 40px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+      animation: fadeSlideUp 1s ease 0.2s both;
+      width: 100%;
+    }
+
+    .flower-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1.2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 20px rgba(232,121,168,0.6);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(--pink-light);
+      font-style: italic;
+      margin-bottom: 1.8rem;
+      opacity: 0.9;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink-deep), transparent);
+      margin: 0 auto 1.8rem;
+    }
+
+    .message {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.92);
+      font-weight: 300;
+    }
+
+    .message strong { color: var(--pink); font-weight: 700; }
+
+    /* ── TYPEWRITER ── */
+    .typewriter-wrap { margin-top: 2rem; min-height: 2.5rem; }
+
+    .typewriter {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--pink-light);
+      border-right: 2px solid var(--pink-deep);
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: blink 0.75s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: var(--pink-deep); }
+      50%       { border-color: transparent; }
+    }
+
+    /* ── HEARTS ROW ── */
+    .hearts {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .heart-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 0.8rem 1.2rem;
+      min-width: 90px;
+      transition: transform 0.2s, background 0.2s;
+      cursor: default;
+    }
+
+    .heart-item:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: rgba(255,255,255,0.2);
+    }
+
+    .heart-item .emoji { font-size: 1.8rem; }
+    .heart-item .label {
+      font-size: 0.75rem;
+      color: var(--pink-light);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    /* ── BUTTON ── */
+    .btn-love {
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
+      padding: 0.9rem 2.4rem;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--pink-deep), var(--purple));
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(232,121,168,0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-love:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(232,121,168,0.7);
+    }
+
+    .btn-love:active { transform: scale(0.97); }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    /* ── FOOTER ── */
+    .footer {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      text-align: center;
+      animation: fadeSlideUp 1s ease 0.8s both;
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .card { padding: 2rem 1.4rem; }
+      .hearts { gap: 0.6rem; }
+      .heart-item { min-width: 76px; padding: 0.6rem 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div class="container">
+    <div class="date-badge">✨ 8 tháng 3 · 2026 ✨</div>
+
+    <div class="card">
+      <span class="flower-icon">🌸</span>
+      <h1>Happy Women's Day</h1>
+      <p class="subtitle">Ngày Quốc tế Phụ nữ</p>
+      <div class="divider"></div>
+
+      <p class="message">
+        Chúc mừng tất cả những người phụ nữ tuyệt vời!<br />
+        Cảm ơn vì <strong>sự mạnh mẽ</strong>, <strong>tình yêu thương</strong><br />
+        và <strong>ánh sáng</strong> mà các bạn mang đến cho cuộc sống.
+      </p>
+
+      <div class="typewriter-wrap">
+        <span class="typewriter" id="tw"></span>
+      </div>
+
+      <div class="hearts">
+        <div class="heart-item"><span class="emoji">💪</span><span class="label">Mạnh mẽ</span></div>
+        <div class="heart-item"><span class="emoji">💖</span><span class="label">Yêu thương</span></div>
+        <div class="heart-item"><span class="emoji">🌺</span><span class="label">Rực rỡ</span></div>
+        <div class="heart-item"><span class="emoji">✨</span><span class="label">Tỏa sáng</span></div>
+      </div>
+
+      <button class="btn-love" id="loveBtn" onclick="sendLove(this)">💌 Gửi yêu thương</button>
+    </div>
+
+    <div class="footer">Made with 💜 · Happy International Women's Day 🌸</div>
+  </div>
+
+  <script>
+    /* ===== CANVAS CHERRY BLOSSOMS ===== */
+    const canvas = document.getElementById('canvas');
+    const ctx    = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const PETAL_COUNT = 60;
+    const petals = [];
+    const COLORS = ['#ffd6e7','#f8b4c8','#e879a8','#f4c2d8','#ffb7cc','#c77dff'];
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    class Petal {
+      constructor() { this.reset(true); }
+
+      reset(init) {
+        this.x      = rand(0, canvas.width);
+        this.y      = init ? rand(-canvas.height, 0) : -20;
+        this.size   = rand(6, 14);
+        this.speedY = rand(1.2, 3);
+        this.speedX = rand(-1, 1);
+        this.angle  = rand(0, Math.PI * 2);
+        this.spin   = rand(-0.04, 0.04);
+        this.opacity = rand(0.5, 0.95);
+        this.color  = COLORS[Math.floor(Math.random() * COLORS.length)];
+      }
+
+      update() {
+        this.y     += this.speedY;
+        this.x     += this.speedX + Math.sin(this.y / 80) * 0.6;
+        this.angle += this.spin;
+        if (this.y > canvas.height + 20) this.reset(false);
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size * 0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      petals.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    /* ===== TYPEWRITER ===== */
+    const quotes = [
+      '"Phụ nữ là ánh mặt trời của thế giới."',
+      '"Sức mạnh thật sự đến từ tâm hồn."',
+      '"Mỗi người phụ nữ đều là một tác phẩm nghệ thuật."',
+      '"Hãy tỏa sáng theo cách của riêng bạn."',
+    ];
+
+    let qi = 0, ci = 0, deleting = false;
+    const tw = document.getElementById('tw');
+
+    function typeStep() {
+      const q = quotes[qi];
+      if (!deleting) {
+        tw.textContent = q.slice(0, ++ci);
+        if (ci === q.length) { deleting = true; setTimeout(typeStep, 2200); return; }
+        setTimeout(typeStep, 55);
+      } else {
+        tw.textContent = q.slice(0, --ci);
+        if (ci === 0) { deleting = false; qi = (qi + 1) % quotes.length; setTimeout(typeStep, 400); return; }
+        setTimeout(typeStep, 28);
+      }
+    }
+    setTimeout(typeStep, 800);
+
+    /* ===== RIPPLE + PETAL BURST ===== */
+    function sendLove(btn) {
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      const size = Math.max(btn.offsetWidth, btn.offsetHeight);
+      ripple.style.cssText = `width:${size}px;height:${size}px;left:${btn.offsetWidth/2 - size/2}px;top:${btn.offsetHeight/2 - size/2}px`;
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+
+      /* Burst petals */
+      for (let i = 0; i < 20; i++) {
+        const p = new Petal();
+        p.x = canvas.width / 2;
+        p.y = canvas.height * 0.65;
+        p.speedY = rand(2, 6);
+        p.speedX = rand(-4, 4);
+        petals.push(p);
+      }
+      setTimeout(() => petals.splice(PETAL_COUNT, 20), 6000);
+
+      btn.textContent = '💜 Đã gửi rồi!';
+      btn.disabled = true;
+      setTimeout(() => { btn.textContent = '💌 Gửi yêu thương'; btn.disabled = false; }, 2500);
+    }
+  </script>
+</body>
+</html>
